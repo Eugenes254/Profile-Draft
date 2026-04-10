@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate Profile Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+:root{
+    --bg1:#0f2027;
+    --bg2:#203a43;
+    --bg3:#2c5364;
+    --text:white;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3));
+    background-size:400% 400%;
+    animation:gradientMove 12s ease infinite;
+    overflow:hidden;
+}
+
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* floating particles */
+body::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size:40px 40px;
+    animation:moveParticles 20s linear infinite;
+    opacity:0.15;
+}
+
+@keyframes moveParticles{
+    from{transform:translate(0,0);} 
+    to{transform:translate(-200px,-200px);} 
+}
+
+.card{
+    width:340px;
+    background:rgba(255,255,255,0.07);
+    backdrop-filter:blur(20px);
+    border-radius:20px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.6);
+    overflow:hidden;
+    text-align:center;
+    transition:0.3s;
+    position:relative;
+}
+
+.card:hover{transform:translateY(-10px) scale(1.03);}
+
+.header{
+    height:130px;
+    background:linear-gradient(135deg,#ff7e5f,#feb47b);
+}
+
+.profile-img{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    border:4px solid white;
+    margin-top:-55px;
+    object-fit:cover;
+}
+
+.content{padding:20px;color:var(--text);} 
+
+.content h2{font-weight:600;}
+
+.content p{font-size:14px;opacity:0.7;margin-bottom:10px;}
+
+.stats{
+    display:flex;
+    justify-content:space-around;
+    margin:15px 0;
+}
+
+.stats div{font-size:14px;}
+
+.buttons{display:flex;justify-content:center;gap:10px;}
+
+button{
+    padding:8px 18px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.follow{background:#00ffcc;color:black;}
+.follow:hover{background:#00ccaa;}
+
+.message{background:transparent;border:1px solid white;color:white;}
+.message:hover{background:white;color:black;}
+
+.toggle{
+    position:absolute;
+    top:10px;
+    right:10px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.socials{
+    margin-top:15px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+.socials i{cursor:pointer;transition:0.3s;}
+.socials i:hover{transform:scale(1.3);} 
+
+</style>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="toggle" onclick="toggleMode()">🌙</div>
+
+<div class="header"></div>
+
+<img src="/WhatsApp Image 2026-04-09 at 07.52.35.jpeg" alt="profile" class="profile-img">
+
+<div class="content">
+    <h2>CodeWithEugene</h2>
+    <p>Frontend Developer</p>
+
+    <div class="stats">
+        <div><strong id="posts">12</strong><br>Posts</div>
+        <div><strong id="followers">120</strong><br>Followers</div>
+        <div><strong>80</strong><br>Following</div>
+    </div>
+
+    <div class="buttons">
+        <button class="follow" onclick="followUser()">Follow</button>
+        <button class="message" onclick="sendMessage()">Message</button>
+    </div>
+
+    <div class="socials">
+        <i class="fab fa-facebook"></i>
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-instagram"></i>
+    </div>
+</div>
+</div>
+
+<script>
+let isDark=true;
+
+function toggleMode(){
+    if(isDark){
+        document.documentElement.style.setProperty('--bg1','#f5f7fa');
+        document.documentElement.style.setProperty('--bg2','#c3cfe2');
+        document.documentElement.style.setProperty('--bg3','#ffffff');
+        document.documentElement.style.setProperty('--text','black');
+    }else{
+        document.documentElement.style.setProperty('--bg1','#0f2027');
+        document.documentElement.style.setProperty('--bg2','#203a43');
+        document.documentElement.style.setProperty('--bg3','#2c5364');
+        document.documentElement.style.setProperty('--text','white');
+    }
+    isDark=!isDark;
+}
+
+let following=false;
+function followUser(){
+    let count=document.getElementById('followers');
+    let num=parseInt(count.innerText);
+
+    if(!following){
+        count.innerText=num+1;
+        alert('Followed 🚀');
+    }else{
+        count.innerText=num-1;
+        alert('Unfollowed');
+    }
+    following=!following;
+}
+
+function sendMessage(){
+    alert('Messaging feature coming soon 💬');
+}
+</script>
+
+</body>
+</html>
